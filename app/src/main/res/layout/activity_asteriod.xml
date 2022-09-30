@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    >
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="30dp"
+        android:paddingHorizontal="20dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:hint="Start Date (yyyy-mm-dd)"
+            android:textColor="@color/colorBlack"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_start" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:hint="End Date (yyyy-mm-dd)"
+            android:textColor="@color/colorBlack"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_end" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:id="@+id/btn_submit"
+            android:layout_marginTop="10dp"
+            android:text="Submit"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorBlack"
+            android:id="@+id/txt_fast"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorBlack"
+            android:id="@+id/txt_near"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorBlack"
+            android:id="@+id/txt_average" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/weekly_chart"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+
+</FrameLayout>
