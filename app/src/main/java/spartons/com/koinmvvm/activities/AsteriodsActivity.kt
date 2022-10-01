@@ -23,7 +23,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import spartons.com.koinmvvm.R
 import spartons.com.koinmvvm.activities.main.viewModel.MovieViewModel
 import java.util.*
-import kotlin.collections.ArrayList
 
 class AsteriodsActivity : AppCompatActivity() {
 
@@ -60,13 +59,9 @@ class AsteriodsActivity : AppCompatActivity() {
 
                     val avr1=(speed.estimatedDiameter!!.kilometers?.minimumDiameter!!+speed.estimatedDiameter.kilometers?.maximumDiameter!!)/2
                     val avr2=(minDistance.estimatedDiameter!!.kilometers?.minimumDiameter!!+minDistance.estimatedDiameter.kilometers?.maximumDiameter!!)/2
-                    txt_average.text = "Average sizes: \n$avr1 km \n$avr2 km"
+                    txt_average.text = "Average sizes: \n${speed.name}: $avr1 km \n${minDistance.name}:$avr2 km"
                     Log.e("zxxx", "min $minDistance $speed")
 
-                   /* asteriods.entries.map { it.value }.flatten().map {
-
-                        it.closeApproachData[0].missDistance.kilometers
-                    }*/
                     setFullDay(asteriods)
                 }
             if (dataState.error != null && !dataState.error.consumed)
@@ -99,7 +94,8 @@ class AsteriodsActivity : AppCompatActivity() {
         xAxis.granularity = 1f
         xAxis.labelRotationAngle = -45F
 
-        xAxis.valueFormatter = IndexAxisValueFormatter(alist)
+        val xAxisFormatter= IndexAxisValueFormatter(alist)
+        xAxis.valueFormatter = xAxisFormatter
 
         xAxis.spaceMin = 1f
         xAxis.axisMaximum = alist.size.toFloat()+1
@@ -115,14 +111,14 @@ class AsteriodsActivity : AppCompatActivity() {
         weekly_chart.setPinchZoom(false)
         weekly_chart!!.axisRight.isEnabled = false
         weekly_chart!!.axisRight.axisMinimum = 0f
-        weekly_chart!!.axisRight.axisMaximum = map.values.maxBy { it.size }?.size!!.toFloat()
+        weekly_chart!!.axisRight.axisMaximum = map.values.maxBy { it.size }?.size!!.toFloat()+5
         weekly_chart!!.axisRight.setLabelCount(4, false)
         weekly_chart!!.axisRight.granularity = 1f
         weekly_chart!!.axisRight.setDrawGridLines(false)
         weekly_chart!!.axisRight.setDrawLimitLinesBehindData(true)
         weekly_chart!!.axisLeft.isEnabled = true
         weekly_chart!!.axisLeft.axisMinimum = 0f
-        weekly_chart!!.axisLeft.axisMaximum = map.values.maxBy { it.size }?.size!!.toFloat()
+        weekly_chart!!.axisLeft.axisMaximum = map.values.maxBy { it.size }?.size!!.toFloat()+5
         weekly_chart!!.axisLeft.setLabelCount(4, false)
         weekly_chart!!.axisLeft.granularity = 1f
         weekly_chart!!.axisLeft.setDrawGridLines(false)
@@ -151,6 +147,8 @@ class AsteriodsActivity : AppCompatActivity() {
         weekly_chart.setTouchEnabled(false)
 
         try {
+
+
             val values = ArrayList<BarEntry>()
             map.keys.forEachIndexed { index, entry ->
                 Log.e("xxx", "added ${index.toFloat()} ${map[entry]?.size!!.toFloat()}")
@@ -185,6 +183,7 @@ class AsteriodsActivity : AppCompatActivity() {
                 data.setDrawValues(false)
                 weekly_chart!!.data = data
                 weekly_chart!!.invalidate()
+
             }
         } catch (e: Exception) {
         }

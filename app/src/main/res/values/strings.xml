@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">NASA API</string>
-    <string name="internet_failure_error">Internet connectivity error</string>
+    <string name="internet_failure_error">Something went wrong!</string>
 </resources>
